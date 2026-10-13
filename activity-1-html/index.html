@@ -1,105 +1,139 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>page</title>
-  <script src="app.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cartly – Everyday essentials, delivered fast</title>
+  <meta name="description" content="Shop beauty, fragrance and more at Cartly. Free delivery on orders over $25.">
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <!-- ACTIVITY 1: this page works, but it is built badly.
-       Rewrite it with proper HTML. See README.md for the checklist. -->
+  <!-- ACTIVITY 1: semantic HTML version. No CSS yet, so an unstyled page is expected. -->
 
-  <div class="header">
-    <div class="logo"><img src="images/logo.svg"></div>
-    <div class="nav">
-      <div class="nav-item" onclick="location.href='#'">Home</div>
-      <div class="nav-item" onclick="location.href='#products'">Products</div>
-      <div class="nav-item" onclick="location.href='#contact'">Contact</div>
-      <div class="nav-item" onclick="location.href='#newsletter'">Newsletter</div>
-    </div>
-    <div class="search">
-      <input type="text" placeholder="Search products">
-      <div class="btn" onclick="alert('Search arrives in Activity 3')">Search</div>
-    </div>
-  </div>
+  <header class="header">
+    <a class="logo" href="#" aria-label="Cartly home">
+      <img src="images/logo.svg" alt="Cartly logo" width="120" height="40">
+    </a>
 
-  <div class="hero">
-    <div class="big-text">Everyday essentials, delivered fast</div>
-    <div class="text">Beauty, fragrance and more. Free delivery on orders over $25.</div>
-    <div class="btn" onclick="location.href='#products'">Shop now</div>
-    <img src="images/hero.svg">
-  </div>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a class="nav-item" href="#">Home</a></li>
+        <li><a class="nav-item" href="#products">Products</a></li>
+        <li><a class="nav-item" href="#contact">Contact</a></li>
+        <li><a class="nav-item" href="#newsletter">Newsletter</a></li>
+      </ul>
+    </nav>
 
-  <div class="section" id="products">
-    <div class="heading-text">Featured products</div>
-    <div class="sub-heading-text">Hand-picked this week</div>
-    <div class="products">
-      <div class="card">
-        <img src="images/mascara.svg">
-        <div class="card-category">Beauty</div>
-        <div class="card-title">Essence Mascara Lash Princess</div>
-        <div class="card-price">$9.99</div>
-        <div class="card-rating">&#9733; 2.6</div>
-        <div class="btn" onclick="alert('Added to cart')">Add to cart</div>
-        <div class="card-link"><a href="#">Click here</a> for details</div>
-      </div>
-      <div class="card">
-        <img src="images/eyeshadow.svg">
-        <div class="card-category">Beauty</div>
-        <div class="card-title">Eyeshadow Palette with Mirror</div>
-        <div class="card-price">$19.99</div>
-        <div class="card-rating">&#9733; 2.9</div>
-        <div class="btn" onclick="alert('Added to cart')">Add to cart</div>
-        <div class="card-link"><a href="#">Click here</a> for details</div>
-      </div>
-      <div class="card">
-        <img src="images/powder.svg">
-        <div class="card-category">Beauty</div>
-        <div class="card-title">Powder Canister</div>
-        <div class="card-price">$14.99</div>
-        <div class="card-rating">&#9733; 4.6</div>
-        <div class="btn" onclick="alert('Added to cart')">Add to cart</div>
-        <div class="card-link"><a href="#">Click here</a> for details</div>
-      </div>
-      <div class="card">
-        <img src="images/lipstick.svg">
-        <div class="card-category">Beauty</div>
-        <div class="card-title">Red Lipstick</div>
-        <div class="card-price">$12.99</div>
-        <div class="card-rating">&#9733; 4.4</div>
-        <div class="btn" onclick="alert('Added to cart')">Add to cart</div>
-        <div class="card-link"><a href="#">Click here</a> for details</div>
-      </div>
-      <div class="card">
-        <img src="images/nail-polish.svg">
-        <div class="card-category">Beauty</div>
-        <div class="card-title">Red Nail Polish</div>
-        <div class="card-price">$8.99</div>
-        <div class="card-rating">&#9733; 4.3</div>
-        <div class="btn" onclick="alert('Added to cart')">Add to cart</div>
-        <div class="card-link"><a href="#">Click here</a> for details</div>
-      </div>
-      <div class="card">
-        <img src="images/perfume.svg">
-        <div class="card-category">Fragrances</div>
-        <div class="card-title">Calvin Klein CK One</div>
-        <div class="card-price">$49.99</div>
-        <div class="card-rating">&#9733; 4.4</div>
-        <div class="btn" onclick="alert('Added to cart')">Add to cart</div>
-        <div class="card-link"><a href="#">Click here</a> for details</div>
-      </div>
-    </div>
-  </div>
+    <form class="search" role="search" onsubmit="event.preventDefault(); alert('Search arrives in Activity 3')">
+      <label for="search-input">Search products</label>
+      <input type="search" id="search-input" name="q" placeholder="Search products">
+      <button type="submit" class="btn">Search</button>
+    </form>
+  </header>
 
-  <div class="newsletter" id="newsletter">
-    <div class="heading-text">Get deals in your inbox</div>
-    <div class="text">One email a week. No spam.</div>
-    <input type="text" placeholder="Your email">
-    <div class="btn" onclick="alert('Subscribed!')">Subscribe</div>
-  </div>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 class="big-text" id="hero-title">Everyday essentials, delivered fast</h1>
+      <p class="text">Beauty, fragrance and more. Free delivery on orders over $25.</p>
+      <a class="btn" href="#products">Shop now</a>
+      <img src="images/hero.svg" alt="Cartly everyday essentials: beauty and fragrance products" width="600" height="400">
+    </section>
 
-  <div class="footer" id="contact">
-    <div><a href="#">Click here</a> to contact us</div>
-    <div><a href="#">Click here</a> for our privacy policy</div>
-    <div>&copy; <span id="year"></span> Cartly</div>
-  </div>
+    <section class="section" id="products" aria-labelledby="products-title">
+      <h2 class="heading-text" id="products-title">Featured products</h2>
+      <p class="sub-heading-text">Hand-picked this week</p>
+
+      <ul class="products">
+        <li>
+          <article class="card">
+            <img src="images/mascara.svg" alt="Essence Mascara Lash Princess" width="300" height="300" loading="lazy">
+            <p class="card-category">Beauty</p>
+            <h3 class="card-title">Essence Mascara Lash Princess</h3>
+            <p class="card-price">$9.99</p>
+            <p class="card-rating"><span aria-hidden="true">&#9733;</span> 2.6 <span class="sr-only">out of 5 stars</span></p>
+            <button type="button" class="btn" onclick="alert('Added to cart')">Add to cart</button>
+            <p class="card-link"><a href="#" aria-label="View details for Essence Mascara Lash Princess">View details</a></p>
+          </article>
+        </li>
+
+        <li>
+          <article class="card">
+            <img src="images/eyeshadow.svg" alt="Eyeshadow palette with mirror" width="300" height="300" loading="lazy">
+            <p class="card-category">Beauty</p>
+            <h3 class="card-title">Eyeshadow Palette with Mirror</h3>
+            <p class="card-price">$19.99</p>
+            <p class="card-rating"><span aria-hidden="true">&#9733;</span> 2.9 <span class="sr-only">out of 5 stars</span></p>
+            <button type="button" class="btn" onclick="alert('Added to cart')">Add to cart</button>
+            <p class="card-link"><a href="#" aria-label="View details for Eyeshadow Palette with Mirror">View details</a></p>
+          </article>
+        </li>
+
+        <li>
+          <article class="card">
+            <img src="images/powder.svg" alt="Powder canister" width="300" height="300" loading="lazy">
+            <p class="card-category">Beauty</p>
+            <h3 class="card-title">Powder Canister</h3>
+            <p class="card-price">$14.99</p>
+            <p class="card-rating"><span aria-hidden="true">&#9733;</span> 4.6 <span class="sr-only">out of 5 stars</span></p>
+            <button type="button" class="btn" onclick="alert('Added to cart')">Add to cart</button>
+            <p class="card-link"><a href="#" aria-label="View details for Powder Canister">View details</a></p>
+          </article>
+        </li>
+
+        <li>
+          <article class="card">
+            <img src="images/lipstick.svg" alt="Red lipstick" width="300" height="300" loading="lazy">
+            <p class="card-category">Beauty</p>
+            <h3 class="card-title">Red Lipstick</h3>
+            <p class="card-price">$12.99</p>
+            <p class="card-rating"><span aria-hidden="true">&#9733;</span> 4.4 <span class="sr-only">out of 5 stars</span></p>
+            <button type="button" class="btn" onclick="alert('Added to cart')">Add to cart</button>
+            <p class="card-link"><a href="#" aria-label="View details for Red Lipstick">View details</a></p>
+          </article>
+        </li>
+
+        <li>
+          <article class="card">
+            <img src="images/nail-polish.svg" alt="Red nail polish bottle" width="300" height="300" loading="lazy">
+            <p class="card-category">Beauty</p>
+            <h3 class="card-title">Red Nail Polish</h3>
+            <p class="card-price">$8.99</p>
+            <p class="card-rating"><span aria-hidden="true">&#9733;</span> 4.3 <span class="sr-only">out of 5 stars</span></p>
+            <button type="button" class="btn" onclick="alert('Added to cart')">Add to cart</button>
+            <p class="card-link"><a href="#" aria-label="View details for Red Nail Polish">View details</a></p>
+          </article>
+        </li>
+
+        <li>
+          <article class="card">
+            <img src="images/perfume.svg" alt="Calvin Klein CK One perfume bottle" width="300" height="300" loading="lazy">
+            <p class="card-category">Fragrances</p>
+            <h3 class="card-title">Calvin Klein CK One</h3>
+            <p class="card-price">$49.99</p>
+            <p class="card-rating"><span aria-hidden="true">&#9733;</span> 4.4 <span class="sr-only">out of 5 stars</span></p>
+            <button type="button" class="btn" onclick="alert('Added to cart')">Add to cart</button>
+            <p class="card-link"><a href="#" aria-label="View details for Calvin Klein CK One">View details</a></p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <h2 class="heading-text" id="newsletter-title">Get deals in your inbox</h2>
+      <p class="text">One email a week. No spam.</p>
+      <form onsubmit="event.preventDefault(); alert('Subscribed!')">
+        <label for="newsletter-email">Your email</label>
+        <input type="email" id="newsletter-email" name="email" placeholder="Your email" autocomplete="email" required>
+        <button type="submit" class="btn">Subscribe</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <p><a href="#">Contact us</a></p>
+    <p><a href="#">Read our privacy policy</a></p>
+    <p>&copy; <span id="year"></span> Cartly</p>
+  </footer>
 </body>
 </html>
