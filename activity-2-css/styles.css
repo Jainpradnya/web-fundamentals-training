@@ -1,55 +1,440 @@
-/* ==========================================================
-   Activity 2: style the Cartly page
-   Work MOBILE-FIRST: write base styles for a phone,
-   then add media queries for bigger screens.
-   Compare with mockups/desktop.png and mockups/mobile.png
-   ========================================================== */
 
-/* TODO 1: Design tokens
-   Create CSS variables on :root for colours, spacing and radius.
-   Suggested palette:
-     ink #222322   text #3a3d3a   muted #5f645f   background #f6f7f2
-     surface #ffffff   line #e2e5dc   accent #d3ff50   accent-dark #4d6b00 */
 :root {
+  --ink: #222322;
+  --text: #3a3d3a;
+  --muted: #5f645f;
+  --background: #f6f7f2;
+  --surface: #ffffff;
+  --line: #e2e5dc;
+  --accent: #d3ff50;
+  --accent-dark: #4d6b00;
+  --focus: #1d4ed8;
 
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+
+  --radius: 12px;
+  --radius-pill: 999px;
+  --shadow: 0 2px 10px rgba(34, 35, 34, 0.08);
+  --font: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --max-width: 1200px;
+  --gutter: var(--space-3);
 }
 
-/* TODO 2: Reset
-   - box-sizing: border-box on everything
-   - images: max-width: 100%; height: auto; display: block
-   - remove default margins on body, headings, paragraphs */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
 
-/* TODO 3: Base typography (body font, size, line-height, colours) */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
-/* TODO 4: Buttons (.btn and .btn-primary), with :hover styles */
+body {
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--background);
+}
 
+h1,
+h2,
+h3 {
+  color: var(--ink);
+  line-height: 1.2;
+}
 
-/* TODO 5: Header
-   - Flexbox: logo, nav and search in a row (wrap on mobile)
-   - position: sticky; top: 0  so it stays visible while scrolling */
+h1 {
+  font-size: clamp(2rem, 7vw, 3.25rem);
+  font-weight: 800;
+}
 
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: var(--space-2);
+}
 
-/* TODO 6: Hero
-   - dark background, white heading
-   - one column on mobile, two columns from 768px */
+a {
+  color: var(--accent-dark);
+}
 
+a:hover {
+  text-decoration-thickness: 2px;
+}
 
-/* TODO 7: Product grid
-   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))
-   Cards: white, rounded, padding.
-   Images: aspect-ratio: 1 / 1; object-fit: cover */
+.section-sub {
+  color: var(--muted);
+  margin-bottom: var(--space-4);
+}
 
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.25rem;
+  font: inherit;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
 
-/* TODO 8: Newsletter form and footer */
+.btn:hover {
+  color: var(--ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
 
+.btn:active {
+  transform: translateY(1px);
+}
 
-/* TODO 9: Accessibility
-   - visible :focus-visible outline on links, buttons and inputs
-   - check text contrast with DevTools */
+.btn-primary {
+  color: var(--ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
 
+.btn-primary:hover {
+  color: #ffffff;
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
 
-/* TODO 10: Media queries
-@media (min-width: 768px) { ... }
-@media (min-width: 1024px) { ... } */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-3);
+  z-index: 20;
+  padding: var(--space-2) var(--space-3);
+  color: var(--ink);
+  background: var(--accent);
+  border-radius: var(--radius);
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--gutter);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  display: block;
+  line-height: 0;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
+.nav-list a {
+  display: inline-block;
+  padding: var(--space-1) 0;
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-list a:hover,
+.nav-list a[aria-current="page"] {
+  border-bottom-color: var(--accent-dark);
+}
+
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.search label {
+  width: 100%;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.search input[type="search"] {
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+
+input[type="search"],
+input[type="email"] {
+  padding: 0.65rem 1rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-pill);
+}
+
+input[type="search"]:hover,
+input[type="email"]:hover {
+  border-color: var(--accent-dark);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--gutter);
+  color: var(--line);
+  background: var(--ink);
+}
+
+.hero h1 {
+  color: #ffffff;
+  margin-bottom: var(--space-3);
+}
+
+.hero-text p {
+  max-width: 55ch;
+  margin-bottom: var(--space-4);
+}
+
+.hero img {
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+#products {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-5) var(--gutter);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(34, 35, 34, 0.14);
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 4px);
+  background: var(--background);
+}
+
+.card-category {
+  margin-top: var(--space-3);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.card-title {
+  margin: var(--space-1) 0;
+  font-size: 1.125rem;
+}
+
+.card-title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.card-title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.card-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.card-rating {
+  margin: var(--space-1) 0 var(--space-3);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.card .btn {
+  margin-top: auto;
+  width: 100%;
+}
+
+.newsletter {
+  padding: var(--space-5) var(--gutter);
+  text-align: center;
+  color: var(--line);
+  background: var(--ink);
+}
+
+.newsletter h2 {
+  color: #ffffff;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  max-width: 36rem;
+  margin: var(--space-4) auto 0;
+}
+
+.newsletter-form label {
+  width: 100%;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.newsletter-form input[type="email"] {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--gutter);
+  color: var(--ink);
+  background: var(--accent);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-4);
+}
+
+.site-footer a {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.hero a:focus-visible,
+.newsletter a:focus-visible,
+.newsletter button:focus-visible,
+.newsletter input:focus-visible {
+  outline-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: var(--space-5);
+  }
+
+  .site-header {
+    flex-wrap: nowrap;
+  }
+
+  .search {
+    width: auto;
+    flex-wrap: nowrap;
+  }
+
+  .search label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    padding-block: var(--space-6);
+  }
+
+  .site-footer {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-5);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --gutter: max(var(--space-5), calc((100vw - var(--max-width)) / 2));
+  }
+
+  #products {
+    padding-inline: var(--space-5);
+  }
+}
