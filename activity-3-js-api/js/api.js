@@ -1,23 +1,26 @@
-// api.js: every network call lives here.
-// The rest of the app should never call fetch() directly.
 
-const BASE_URL = "https://dummyjson.com";
+const API_URL = "https://dummyjson.com/products";
 
-// TODO 1: write a helper that GETs a path and returns parsed JSON.
-//   - await fetch(`${BASE_URL}${path}`)
-//   - if response.ok is false, throw new Error(...)
-//   - return response.json()
-async function getJSON(path) {
-  // your code here
+// Fetch JSON data and handle HTTP errors
+export async function getJSON(url) {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`API error: ${response.status}`);
+  }
+
+  return await response.json();
 }
 
-// TODO 2: GET /products?limit=12
-export function getProducts(limit = 12) {
-  // return getJSON(...)
+// Get all products
+export async function getProducts() {
+  const data = await getJSON(`${API_URL}?limit=30`);
+  return data.products;
 }
 
-// TODO 3: GET /products/search?q=<query>
-// Hint: wrap the query in encodeURIComponent()
-export function searchProducts(query) {
-  // return getJSON(...)
+// Search products using the API
+export async function searchProducts(query) {
+  const url = `${API_URL}/search?q=${encodeURIComponent(query)}`;
+  const data = await getJSON(url);
+  return data.products;
 }
